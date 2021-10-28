@@ -91,6 +91,14 @@ rules:
   - "useraccounts"
   verbs:
   - "*"
+- apiGroups:
+  - ""
+  resources:
+  - "secrets"
+  - "serviceaccounts"
+  verbs:
+  - "get"
+  - "list"
 EOF
 fi
 
