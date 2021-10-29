@@ -91,6 +91,12 @@ rules:
   - "useraccounts"
   verbs:
   - "*"
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: toolchain-sa-read
+rules:
 - apiGroups:
   - ""
   resources:
@@ -99,6 +105,19 @@ rules:
   verbs:
   - "get"
   - "list"
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: ${SA_NAME}-toolchain-sa-read
+subjects:
+- kind: ServiceAccount
+  name: ${SA_NAME}
+  namespace: ${OPERATOR_NS}
+roleRef:
+  kind: ClusterRole
+  name: toolchain-sa-read
+  apiGroup: rbac.authorization.k8s.io
 EOF
 fi
 
